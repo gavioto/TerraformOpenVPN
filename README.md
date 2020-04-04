@@ -16,7 +16,7 @@ Terraform scripts to create a quick OpenVPN server in the cloud (AWS, Google (GC
 6. Edit your own `cert_details` (use `cert_details.sample` as template)
 7. In the cloud provider you're using, edit the region in `variables.tf` as needed (default is Canada).
 8. For GCP, be sure you've created a new project and noted it in `variables.tf`.
-9. cd to the cloud provider directory and perform a `terraform apply`.
+9. cd to the cloud provider directory and perform a `terraform init` and `terraform apply`.
 10. The new `.ovpn` file will be copied from new instance into `cert_details`. Open with your OpenVPN client.
 
 ## To Do
