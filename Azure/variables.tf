@@ -1,5 +1,5 @@
 variable "location" {
-  default = "Canada East"
+  default = "West Europe"
 }
 
 variable "hostname" {

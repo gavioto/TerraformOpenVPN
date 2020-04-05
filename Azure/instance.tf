@@ -3,7 +3,7 @@ resource "azurerm_virtual_machine" "openvpn" {
   location              = var.location
   resource_group_name   = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.nic.id]
-  vm_size               = "Standard_A0"
+  vm_size               = "Standard_F2s_v2"
 
   # Uncomment this line to delete the OS disk automatically when deleting the VM
   delete_os_disk_on_termination = true
@@ -47,7 +47,7 @@ resource "azurerm_virtual_machine" "openvpn" {
   }
 
   provisioner "file" {
-    content     = data.template_file.deployment_shell_script.rendered
+    content     = templatefile("userdata.sh",{cert_details       = file(var.cert_details),client_config_name = var.client_config_name})
     destination = "/tmp/userdata.sh"
   }
 
@@ -100,7 +100,7 @@ resource "azurerm_virtual_machine" "openvpn" {
 }
 
 data "template_file" "deployment_shell_script" {
-  template = file("userdata.sh")
+ template = file("userdata.sh")
 
   vars = {
     cert_details       = file(var.cert_details)
